@@ -1,3 +1,13 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+index:
+  path: /
+  controller: App\Controller\HackBlogController::portada
+
+noticia:
+  path: /noticia/{id_noticia}
+  controller: App\Controller\HackBlogController::noticia
+  defaults:
+    id-noticia: 0

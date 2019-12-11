@@ -3,20 +3,21 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>The Hack blog</title>
-        {% block css %}
-            <link rel="stylesheet" href="css/style.css" />
+        <title>{% block titulo %}The Hack blog{% endblock %}</title>
+        {% block stylesheets %}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
         {% endblock %}
     </head>
     <body>
         {% block cuerpo %}
-        <header><h1><a href="index.php">The Hack blog</a></h1></header>
+        
+        <header><h1><a href="{{ url('index') }}">The Hack blog</a></h1></header>
         <div id="container">
             <div id="main">
             {% block main %}{% endblock %}
             </div>
         </div>
         {% endblock %}
-        <footer>Copyright © 2019 <span>The Hack Blog</span></footer>
+        <footer>Copyright © {{ "now"|date("Y") }} <span>The Hack Blog</span></footer>
     </body>
 </html>

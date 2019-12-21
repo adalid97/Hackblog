@@ -9,9 +9,11 @@ index:
 noticia:
   path: /noticia/{id_noticia}
   controller: App\Controller\HackBlogController::noticia
+  requirements:
+    id: '\d+'
   defaults:
     id-noticia: 0
   
-app_nuevo_comentario:
-  path: /noticia/{id_noticia}
-  controller: App\Controller\HackBlogController::nuevoComentario
+nuevaNoticia:
+  path: /noticia/nueva
+  controller: App\Controller\HackBlogController::nuevaNoticia

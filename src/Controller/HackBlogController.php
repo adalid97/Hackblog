@@ -22,20 +22,21 @@ class HackBlogController extends AbstractController
         ]);
     }
 
-    public function nuevoComentario(Request $request)
+    public function nuevaNoticia(Request $request)
     {
-        $comentario = new Comentario();
+        $noticia = new Noticia();
 
-        $form = $this->createFormBuilder($comentario)
-        ->add('nombre', TextType::class)
-        ->add('comentario', TextType::class)
+        $form = $this->createFormBuilder($noticia)
+        ->add('titular', TextType::class)
+        ->add('entradilla', TextType::class)
+        ->add('cuerpo', TextType::class)
+        ->add('fecha', DateType::class)
         ->add('save', SubmitType::class,
-        array('label' => 'Añadir Comentario'))
+        array('label' => 'Añadir Noticia'))
         ->getForm();
-        return $this->render('noticia.html.twig', array(
+
+        return $this->render('nuevaNoticia.html.twig', array(
         'form' => $form->createView(),
         ));
     }
-
-
 }

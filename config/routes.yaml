@@ -11,3 +11,7 @@ noticia:
   controller: App\Controller\HackBlogController::noticia
   defaults:
     id-noticia: 0
+  
+app_nuevo_comentario:
+  path: /noticia/{id_noticia}
+  controller: App\Controller\HackBlogController::nuevoComentario

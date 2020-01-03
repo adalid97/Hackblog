@@ -6,14 +6,13 @@ index:
   path: /
   controller: App\Controller\HackBlogController::portada
 
+nuevaNoticia:
+  path: /noticia/nueva
+  controller: App\Controller\HackBlogController::nuevaNoticia
+
 noticia:
   path: /noticia/{id_noticia}
   controller: App\Controller\HackBlogController::noticia
   requirements:
     id: '\d+'
-  defaults:
-    id-noticia: 0
-  
-nuevaNoticia:
-  path: /noticia/nueva
-  controller: App\Controller\HackBlogController::nuevaNoticia
+

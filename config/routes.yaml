@@ -16,3 +16,6 @@ noticia:
   requirements:
     id: '\d+'
 
+noticiaCreada:
+path: /noticia/creada
+controller: App\Controller\HackBlogController::noticiaCreada

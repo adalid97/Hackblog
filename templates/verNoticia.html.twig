@@ -1,0 +1,9 @@
+{% extends 'blogBase.html.twig' %}
+{% block titulo %}Noticia{% endblock %}
+{% block main %}
+    <h4>Noticia</h4> </br>
+        Titular: {{ noticia.titular }}</br>
+        Entradilla: {{ noticia.entradilla }}</br>
+        Cuerpo: {{ noticia.cuerpo }}</br>
+        Fecha: ({{ noticia.fecha|date("d/m/Y") }})</br>
+{% endblock %} 

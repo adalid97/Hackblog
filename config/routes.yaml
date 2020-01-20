@@ -16,3 +16,10 @@ noticia:
   requirements:
     id: '\d+'
 
+noticiaCreada:
+  path: /noticia/creada
+  controller: App\Controller\HackBlogController::noticiaCreada
+
+verNoticia:
+  path: /noticia/ver/{id}
+  controller: App\Controller\HackBlogController::verNoticia

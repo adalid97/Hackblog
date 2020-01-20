@@ -36,8 +36,43 @@ class HackBlogController extends AbstractController
         array('label' => 'Añadir Noticia'))
         ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $noticia = $form->getData();
+            // Obtenemos el gestor de entidades de Doctrine
+            $entityManager = $this->getDoctrine()->getManager();
+            // Le decimos a doctrine que nos gustaría almacenar
+            // el objeto de la variable en la base de datos
+            $entityManager->persist($noticia);
+            // Ejecuta las consultas necesarias
+            $entityManager->flush();
+            //Redirigimos a una página de confirmación.
+            return $this->redirectToRoute('noticiaCreada');
+        }
+
         return $this->render('nuevaNoticia.html.twig', array(
         'form' => $form->createView(),
         ));
     }
+
+    public function noticiaCreada()
+    {
+        return $this->render('noticiaCreada.html.twig');
+    }
+
+    public function verNoticia($id)
+    {
+    $entityManager = $this->getDoctrine()->getManager();
+    $noticia= $entityManager->getRepository(Noticia::class)->find($id);
+    if (!$noticia){
+    throw $this->createNotFoundException(
+    'No existe ninguna noticia con id '.$id
+    );
+    }
+    return $this->render('verNoticia.html.twig', array(
+    'noticia' => $noticia,
+    ));
+    }
+
 }

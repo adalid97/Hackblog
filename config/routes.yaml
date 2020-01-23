@@ -23,3 +23,15 @@ noticiaCreada:
 verNoticia:
   path: /noticia/ver/{id}
   controller: App\Controller\HackBlogController::verNoticia
+
+noticias:
+  path: /noticia/
+  controller: App\Controller\HackBlogController::listaNoticias
+
+editarNoticia:
+  path: /noticia/editar/{id}
+  controller: App\Controller\HackBlogController::editarNoticia
+
+borrarNoticia:
+  path: /noticia/borrar/{id}
+  controller: App\Controller\HackBlogController::borrarNoticia

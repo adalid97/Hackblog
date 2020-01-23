@@ -6,4 +6,7 @@
         Entradilla: {{ noticia.entradilla }}</br>
         Cuerpo: {{ noticia.cuerpo }}</br>
         Fecha: ({{ noticia.fecha|date("d/m/Y") }})</br>
+    <br>
+    <p><a href="{{ path('editarNoticia', {'id' : noticia.id}) }}">Editar Noticia</a></p> <br>
+    <p><a href="{{ path('borrarNoticia', {'id' : noticia.id}) }}">Borrar Noticia</a></p>
 {% endblock %} 

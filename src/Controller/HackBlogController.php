@@ -63,16 +63,85 @@ class HackBlogController extends AbstractController
 
     public function verNoticia($id)
     {
-    $entityManager = $this->getDoctrine()->getManager();
-    $noticia= $entityManager->getRepository(Noticia::class)->find($id);
-    if (!$noticia){
-    throw $this->createNotFoundException(
-    'No existe ninguna noticia con id '.$id
-    );
+        $entityManager = $this->getDoctrine()->getManager();
+        $noticia= $entityManager->getRepository(Noticia::class)->find($id);
+        if (!$noticia){
+        throw $this->createNotFoundException(
+            'No existe ninguna noticia con id '.$id
+        );
     }
     return $this->render('verNoticia.html.twig', array(
-    'noticia' => $noticia,
+        'noticia' => $noticia,
     ));
+    }
+
+    public function listaNoticias()
+    {
+        // Obtenemos el gestor de entidades de Doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+        // obtenemos todas las noticias
+        $noticias= $entityManager->getRepository(Noticia::class)->findAll();
+        return $this->render('listaNoticias.html.twig', array(
+            'noticias' => $noticias,
+        ));
+    }
+
+    public function editarNoticia(Request $request, $id)
+    {
+        // Obtenemos el gestor de entidades de Doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        // Obtenenemos el repositorio de noticias y buscamos en el usando la i
+        $noticia = $entityManager->getRepository(Noticia::class)->find($id);
+        
+        // Si la noticia no existe lanzamos una excepción.
+        if (!$noticia){
+            throw $this->createNotFoundException(
+                'No existe ninguna noticia con id '.$id
+        );
+        }
+       
+        // Creamos el formulario a partir de $noticia
+        $form = $this->createFormBuilder($noticia)
+            ->add('titular', TextType::class)
+            ->add('entradilla', TextareaType::class)
+            ->add('cuerpo', TextareaType::class)
+            ->add('fecha', DateType::class)
+            ->add('save', SubmitType::class, array('label' => 'Editar Noticia'))
+            ->getForm();
+          
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+            // De esta manera podemos sobreescribir la variable $noticia con l
+            $noticia = $form->getData();
+        
+            // Ejecuta las consultas necesarias (UPDATE en este caso)
+            $entityManager->flush();
+        
+            //Redirigimos a la página de ver la noticia editada.
+            return $this->redirectToRoute('verNoticia', array('id'=>$id));
+        }
+        return $this->render('nuevaNoticia.html.twig', array(
+            'form' => $form->createView(),
+        ));    
+    }
+
+    public function borrarNoticia($id)
+    {
+        // Obtenemos el gestor de entidades de Doctrine
+        $entityManager = $this->getDoctrine()->getManager();
+        // Obtenenemos el repositorio de Noticia y buscamos en el usando la i
+        $noticia= $entityManager->getRepository(Noticia::class)->find($id);
+        // Si la noticia no existe lanzamos una excepción.
+        if (!$noticia){
+            throw $this->createNotFoundException(
+                'No existe ninguna noticia con id '.$id
+        );
+        }
+        $entityManager->remove($noticia);
+        $entityManager->flush();
+        return $this->render('noticiaBorrada.html.twig');
     }
 
 }

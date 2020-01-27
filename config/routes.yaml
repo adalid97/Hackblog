@@ -1,27 +1,24 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
 
 index:
   path: /
-  controller: App\Controller\HackBlogController::portada
+  controller: App\Controller\HackBlogController::listaNoticias
 
 nuevaNoticia:
   path: /noticia/nueva
   controller: App\Controller\HackBlogController::nuevaNoticia
 
-noticia:
-  path: /noticia/{id_noticia}
-  controller: App\Controller\HackBlogController::noticia
-  requirements:
-    id: '\d+'
+# noticia:
+#   path: /noticia/{id_noticia}
+#   controller: App\Controller\HackBlogController::noticia
+#   requirements:
+#     id: '\d+'
 
 noticiaCreada:
   path: /noticia/creada
   controller: App\Controller\HackBlogController::noticiaCreada
 
 verNoticia:
-  path: /noticia/ver/{id}
+  path: /noticia/{id}
   controller: App\Controller\HackBlogController::verNoticia
 
 noticias:

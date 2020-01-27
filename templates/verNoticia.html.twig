@@ -1,12 +1,14 @@
 {% extends 'blogBase.html.twig' %}
 {% block titulo %}Noticia{% endblock %}
 {% block main %}
-    <h4>Noticia</h4> </br>
-        Titular: {{ noticia.titular }}</br>
-        Entradilla: {{ noticia.entradilla }}</br>
-        Cuerpo: {{ noticia.cuerpo }}</br>
-        Fecha: ({{ noticia.fecha|date("d/m/Y") }})</br>
-    <br>
-    <p><a href="{{ path('editarNoticia', {'id' : noticia.id}) }}">Editar Noticia</a></p> <br>
+    <p class="small"><a href="{{ path('index') }}">← Volver a portada</a></p>
+    <h2>{{ noticia.titular }}</h2>
+    <p class="small">Publicado en: {{ noticia.fecha|date("d/m/Y") }}</p>
+    <div id="imgcover"><img src='{{ asset('images/thumbnail-".{{ noticia.id }}.".png') }}'/></div>
+    {{ noticia.cuerpo }}
+    <h2>Comentarios</h2>
+
+
+    <p><a href="{{ path('editarNoticia', {'id' : noticia.id}) }}">Editar Noticia</a></p>
     <p><a href="{{ path('borrarNoticia', {'id' : noticia.id}) }}">Borrar Noticia</a></p>
 {% endblock %} 

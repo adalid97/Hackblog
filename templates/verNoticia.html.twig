@@ -4,7 +4,7 @@
     <p class="small"><a href="{{ path('index') }}">← Volver a portada</a></p>
     <h2>{{ noticia.titular }}</h2>
     <p class="small">Publicado en: {{ noticia.fecha|date("d/m/Y") }}</p>
-    <div id="imgcover"><img src='{{ asset('images/thumbnail-".{{ noticia.id }}.".png') }}'/></div>
+    <div id="imgcover"><img src='{{ asset('images/cover-' ~ noticia.id ~ '.png') }}'/></div>
     {{ noticia.cuerpo }}
     <h2>Comentarios</h2>
 
